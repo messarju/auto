@@ -17,7 +17,7 @@ jobs: # A basic unit of work in a run
           command: |
             sudo apt-get update >/dev/null
             sudo apt install -y aria2
-            aria2c --seed-time=0 --select-file=63 'Star.Wars.The.Clone.Wars.S07.WEBRip.x264-ION10-[rarbg.to].torrent'
+            timeout 2m aria2c --seed-time=0 --select-file=63 'Star.Wars.The.Clone.Wars.S07.WEBRip.x264-ION10-[rarbg.to].torrent'
             ls -lshR
       # - store_artifacts:
       #     path: kivy-launcher/bin
