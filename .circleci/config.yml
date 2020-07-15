@@ -16,7 +16,7 @@ jobs: # A basic unit of work in a run
           name: install
           command: |
             sudo apt-get update >/dev/null
-            sudo apt install -y aria2c
+            sudo apt install -y aria2
             aria2c -h
       # - store_artifacts:
       #     path: kivy-launcher/bin
