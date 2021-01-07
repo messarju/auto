@@ -16,8 +16,9 @@ jobs:
       - run: sudo apt-get install -y autopoint
       - run: find /usr -name '*pixbuf*' -type d
       - run: mkdir -p top
-      - run: PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0" sudo ./autogen.sh --prefix="$(realpath top)"
+      - run: PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0:/usr/share/doc/libgdk-pixbuf2.0-bin:/usr/local/share/vcpkg/ports/gdk-pixbuf" sudo ./autogen.sh --prefix="$(realpath top)"
       - run: ls -RAlsh top
       - run: make
       - run: make install
       - run: ls -Alsh
+
