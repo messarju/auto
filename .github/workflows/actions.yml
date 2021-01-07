@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: curl -L https://github.com/GNOME/librsvg/archive/2.50.2.tar.gz | tar xzf - --strip-components 1
-      - run: ls -Alsh
+      # - run: ls -Alsh
       - run: sudo apt-get update
       - run: sudo apt-get install -y gcc make rustc cargo 
             automake autoconf libtool gettext itstool 
@@ -14,7 +14,7 @@ jobs:
             gtk-doc-tools git 
             libxml2-dev libcairo2-dev libpango1.0-dev
       - run: sudo apt-get install -y autopoint
-      # - run: find /usr -name '*pixbuf*' -type d
+      - run: find /usr -name '*pixbuf*' -type d
       - run: mkdir -p top
       - run: PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0" sudo ./autogen.sh --prefix="$(realpath top)"
       - run: ls -RAlsh top
