@@ -5,10 +5,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-#       - run: apt-get install -y gcc make rustc cargo \
-# automake autoconf libtool gettext itstool \
-# libgdk-pixbuf2.0-dev libgirepository1.0-dev \
-# gtk-doc-tools git \
-# libxml2-dev libcairo2-dev libpango1.0-dev
-      - run: curl -L https://github.com/GNOME/librsvg/archive/2.50.2.tar.gz | tar xzf -
-      - run: ls -lAsh
+      - run: apt-get install -y gcc make rustc cargo 
+            automake autoconf libtool gettext itstool 
+            libgdk-pixbuf2.0-dev libgirepository1.0-dev 
+            gtk-doc-tools git 
+            libxml2-dev libcairo2-dev libpango1.0-dev
+      - run: curl -L https://github.com/GNOME/librsvg/archive/2.50.2.tar.gz | tar xzf - --strip-components 1
+      - run: ls -Alsh
+      - run: ./autogen.sh
+      - run: make
+      - run: make install
