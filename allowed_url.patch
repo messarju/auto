@@ -1,0 +1,11 @@
+--- rsvg_internals/src/allowed_url.rs	2020-10-03 02:15:11.000000000 +0800
++++ /mnt/META/wrx/ci/auto/allowed_url.rs	2021-01-07 17:29:24.226458300 +0800
+@@ -54,6 +54,8 @@
+             .parse(href)
+             .map_err(AllowedUrlError::HrefParseError)?;
+ 
++        return Ok(AllowedUrl(url));
++
+         // Allow loads of data: from any location
+         if url.scheme() == "data" {
+             return Ok(AllowedUrl(url));
