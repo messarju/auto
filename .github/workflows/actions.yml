@@ -17,8 +17,7 @@ jobs:
       - run: find /usr -name '*pixbuf*' -type d
       - run: mkdir -p top
       - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0:/usr/share/doc/libgdk-pixbuf2.0-bin:/usr/local/share/vcpkg/ports/gdk-pixbuf" printenv
-      - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0:/usr/share/doc/libgdk-pixbuf2.0-bin:/usr/local/share/vcpkg/ports/gdk-pixbuf" ./autogen.sh
-# --prefix="$(realpath top)"
+      - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0:/usr/share/doc/libgdk-pixbuf2.0-bin:/usr/local/share/vcpkg/ports/gdk-pixbuf" ./autogen.sh --prefix="$(realpath top)"
       - run: ls -RAlsh top
       - run: sudo make
       - run: sudo make install
