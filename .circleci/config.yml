@@ -1,0 +1,23 @@
+version: 2 # use CircleCI 2.0
+jobs: # A basic unit of work in a run
+  build: # runs not using Workflows must have a `build` job as entry point
+    # directory where steps are run
+    working_directory: ~/kivy1
+    docker: # run the steps with Docker
+      # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
+      - image: circleci/openjdk:8u252-jdk
+      # - image: circleci/python:3.8.3
+    steps: # steps that comprise the `build` job
+      - checkout # check out source code to working directory
+      - run:
+          name: environ
+          command: echo 'export PATH=$HOME/.local/bin:$PATH' >> $BASH_ENV
+      - run:
+          name: install
+          command: |
+            sudo apt-get update >/dev/null
+            sudo apt install -y aria2
+            timeout 2m aria2c --enable-rpc=false --enable-dht=false --enable-dht6=false --seed-time=0 --select-file=63 'Star.Wars.The.Clone.Wars.S07.WEBRip.x264-ION10-[rarbg.to].torrent'
+            ls -lshR
+      # - store_artifacts:
+      #     path: kivy-launcher/bin
