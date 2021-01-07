@@ -14,7 +14,8 @@ jobs:
             gtk-doc-tools git 
             libxml2-dev libcairo2-dev libpango1.0-dev
       - run: sudo apt-get install -y autopoint
-      - run: ./autogen.sh
+      - run: find /usr -name '*pixbuf*' -type d
+      - run: PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0" ./autogen.sh
       - run: make
       - run: make install
       - run: ls -Alsh
