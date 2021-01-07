@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="SVGRoot"
+   version="1.1"
+   viewBox="0 0 640 360"
+   style="fill:#ffff00;stroke:#ff0000"
+   sodipodi:docname="res.svg"
+   width="640"
+   height="360"
+   inkscape:version="1.0.1 (1.0.1+r73)">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="709"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="0.69855372"
+     inkscape:cx="418.58718"
+     inkscape:cy="310.94843"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="SVGRoot"
+     inkscape:document-rotation="0" />
+  <image
+     xlink:href="opo9545b2_large.jpg"
+     width="154.56"
+     height="154.56"
+     preserveAspectRatio="none"
+     id="image845"
+     x="421.86542"
+     y="148.11928" />
+  <image
+     xlink:href="../opo9516_large.jpg"
+     width="163.2"
+     height="238.08"
+     preserveAspectRatio="none"
+     id="image859"
+     x="45.350151"
+     y="83.598503" />
+  <image
+     xlink:href="../opo9545b4_large.jpg"
+     y="124.94901"
+     x="232.74313"
+     id="image841"
+     preserveAspectRatio="none"
+     height="154.56"
+     width="154.56" />
+</svg>

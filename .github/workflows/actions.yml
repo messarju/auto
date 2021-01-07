@@ -17,7 +17,7 @@ jobs:
       - run: find /usr -name '*pixbuf*' -type d
       - run: mkdir -p top
       # - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0:/usr/share/doc/libgdk-pixbuf2.0-bin:/usr/local/share/vcpkg/ports/gdk-pixbuf" printenv
-      - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0:/usr/share/doc/libgdk-pixbuf2.0-bin:/usr/local/share/vcpkg/ports/gdk-pixbuf" ./autogen.sh --prefix="$(realpath top)"
+      - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0:/usr/share/doc/libgdk-pixbuf2.0-bin" ./autogen.sh --prefix="$(realpath top)"
       - run: sudo make
       - run: sudo make install
       - run: ls -Alsh
@@ -27,4 +27,11 @@ jobs:
         with:
           name: arc
           path: top/
+      - run: env LD_LIBRARY_PATH="./top/lib:$LD_LIBRARY_PATH" ./top/bin/rsvg-convert svg/res.svg -f png -o test.png
+      - name: upload_test_png
+        uses: actions/upload-artifact@v2
+        with:
+          name: test_png
+          path: test.png
+
 
