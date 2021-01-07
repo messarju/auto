@@ -13,8 +13,7 @@ jobs:
             libgdk-pixbuf2.0-dev libgirepository1.0-dev 
             gtk-doc-tools git 
             libxml2-dev libcairo2-dev libpango1.0-dev
-      # - run: sudo apt-get install -y libgdk-pixbuf2.0-dev libgirepository1.0-dev 
-      #       gtk-doc-tools libcairo2-dev libpango1.0-dev
+      - run: sudo apt-get install -y autopoint
       - run: ./autogen.sh
       - run: make
       - run: make install
