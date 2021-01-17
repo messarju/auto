@@ -2,7 +2,8 @@ name: learn-github-actions
 on: [push]
 jobs:
   run1:
-    runs-on: ubuntu-20.04
+    # runs-on: ubuntu-20.04
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - run: curl -L https://github.com/GNOME/librsvg/archive/2.50.2.tar.gz | tar xzf - --strip-components 1
@@ -15,17 +16,15 @@ jobs:
             libxml2-dev libcairo2-dev libpango1.0-dev
       - run: sudo apt-get install -y autopoint
       - run: patch rsvg_internals/src/allowed_url.rs allowed_url.patch
-      - run: find /usr -name '*pixbuf*' -type d
+      # - run: find /usr -name '*pixbuf*' -type d
       - run: mkdir -p top
       # - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0:/usr/share/doc/libgdk-pixbuf2.0-bin:/usr/local/share/vcpkg/ports/gdk-pixbuf" printenv
+      # - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0" ./autogen.sh --help
       - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0" ./autogen.sh --prefix="$(realpath top)"
-      - run: ldd --version ldd
-      - run: rustc --version
-      - run: cargo --version
+      - run: ldd --version ldd & rustc --version & cargo --version
       - run: sudo make
       - run: sudo make install
-      - run: ls -Alsh
-      - run: ls -RAlsh top
+      - run: ls -Alsh && -RAlsh top
       - name: upload_artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -37,5 +36,3 @@ jobs:
         with:
           name: test_png
           path: test.png
-
-
