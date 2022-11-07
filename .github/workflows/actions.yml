@@ -3,26 +3,26 @@ name: Run
 on:
   workflow_dispatch:
     inputs:
-      url_run:
+      run_url:
         type: string
-      run_src:
+      a:
         type: string        
 jobs:
   start:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+#       - uses: actions/checkout@v2
     
-      - name: test
-#         env:
-#           RUN_URL: ${{ secrets.RUN_URL }}
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: run
+        env:
+          RUN_URL: ${{ inputs.run_url }}
+          A: ${{ inputs.a }}
         run: |
           # source <(curl -L "$RUN_URL")
-          echo ["$url_run"]
-          echo ["$run_src"]
-          echo ${{ inputs.url_run }}
-          echo ${{ inputs.run_src }} 
+          echo ["$RUN_URL"]
+          echo ["$A"]
+          echo ${{ inputs.run_url }}
+          echo ${{ inputs.a }} 
           printenv | sort
           
       - name: upload_artifacts
