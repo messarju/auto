@@ -1,38 +1,32 @@
-name: learn-github-actions
-on: [push]
+name: Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      url_run:
+        type: environment
+      run_src:
+        type: string        
 jobs:
-  run1:
-    # runs-on: ubuntu-20.04
-    runs-on: ubuntu-18.04
+  start:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: curl -L https://github.com/GNOME/librsvg/archive/2.50.2.tar.gz | tar xzf - --strip-components 1
-      # - run: ls -Alsh
-      - run: sudo apt-get update
-      - run: sudo apt-get install -y gcc make rustc cargo 
-            automake autoconf libtool gettext itstool 
-            libgdk-pixbuf2.0-dev libgirepository1.0-dev 
-            gtk-doc-tools git 
-            libxml2-dev libcairo2-dev libpango1.0-dev
-      - run: sudo apt-get install -y autopoint
-      - run: patch rsvg_internals/src/allowed_url.rs allowed_url.patch
-      # - run: find /usr -name '*pixbuf*' -type d
-      - run: mkdir -p top
-      # - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0:/usr/share/doc/libgdk-pixbuf2.0-bin:/usr/local/share/vcpkg/ports/gdk-pixbuf" printenv
-      # - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0" ./autogen.sh --help
-      - run: sudo env PATH="$PATH:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0" ./autogen.sh --prefix="$(realpath top)"
-      - run: ldd --version ldd & rustc --version & cargo --version
-      - run: sudo make
-      - run: sudo make install
-      - run: ls -Alsh && -RAlsh top
+    
+      - name: test
+#         env:
+#           RUN_URL: ${{ secrets.RUN_URL }}
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # source <(curl -L "$RUN_URL")
+          echo ["$url_run"]
+          echo ["$run_src"]
+          echo ${{ inputs.url_run }}
+          echo ${{ inputs.run_src }} 
+          printenv | sort
+          
       - name: upload_artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: arc
-          path: top/
-      - run: env LD_LIBRARY_PATH="./top/lib:$LD_LIBRARY_PATH" ./top/bin/rsvg-convert svg/res.svg -f png -o test.png
-      - name: upload_test_png
-        uses: actions/upload-artifact@v2
-        with:
-          name: test_png
-          path: test.png
+          name: artifacts
+          path: /tmp/.artifacts
