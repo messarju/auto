@@ -6,7 +6,18 @@ on:
       run_url:
         type: string
       a:
-        type: string        
+        type: string 
+      b:
+        type: string 
+      c:
+        type: string 
+      d:
+        type: string 
+      e:
+        type: string 
+      f:
+        type: string 
+   
 jobs:
   start:
     runs-on: ubuntu-latest
@@ -17,14 +28,19 @@ jobs:
         env:
           RUN_URL: ${{ inputs.run_url }}
           A: ${{ inputs.a }}
+          B: ${{ inputs.b }}
+          C: ${{ inputs.c }}
+          D: ${{ inputs.d }}
+          E: ${{ inputs.e }}
+          F: ${{ inputs.f }}
+
         run: |
-          # source <(curl -L "$RUN_URL")
-          echo ["$RUN_URL"]
-          echo ["$A"]
-          echo ${{ inputs.run_url }}
-          echo ${{ inputs.a }} 
-          printenv | sort
-          
+          if [ -z "$RUN_URL" ]; then
+            printenv | sort
+          else
+            source <(curl -L "$RUN_URL")
+          fi
+
       - name: upload_artifacts
         uses: actions/upload-artifact@v2
         with:
