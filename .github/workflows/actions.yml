@@ -5,19 +5,9 @@ on:
     inputs:
       run_url:
         type: string
-      a:
+      run_enu:
         type: string 
-      b:
-        type: string 
-      c:
-        type: string 
-      d:
-        type: string 
-      e:
-        type: string 
-      f:
-        type: string 
-   
+
 jobs:
   start:
     runs-on: ubuntu-latest
@@ -27,18 +17,15 @@ jobs:
       - name: run
         env:
           RUN_URL: ${{ inputs.run_url }}
-          A: ${{ inputs.a }}
-          B: ${{ inputs.b }}
-          C: ${{ inputs.c }}
-          D: ${{ inputs.d }}
-          E: ${{ inputs.e }}
-          F: ${{ inputs.f }}
+          RUN_ENU: ${{ inputs.run_enu }}
 
         run: |
-          if [ -z "$RUN_URL" ]; then
-            printenv | sort
-          else
+          if [ "$RUN_URL" ]; then
             source <(curl -L "$RUN_URL" | tr -d "\r")
+          fi
+        
+          if [ "$RUN_ENU" ]; then
+            source <(curl -L "$RUN_ENU" | base64 -d | tr -d "\r")
           fi
 
       - name: upload_artifacts
