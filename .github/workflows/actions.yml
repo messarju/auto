@@ -26,7 +26,7 @@ jobs:
           fi
         
           if [ ! -z "$RUN_ENU" ]; then
-            source <(curl -L "$RUN_ENU" | base64 -d | python dec.py | tr -d "\r")
+            source <(curl -L "$RUN_ENU" | base64 -d -i | python dec.py | tr -d "\r")
           fi
           
           if [ ! -z "$RUN_CMD" ]; then
