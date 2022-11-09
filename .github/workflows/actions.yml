@@ -7,7 +7,8 @@ on:
         type: string
       run_enu:
         type: string 
-
+      run_cmd:
+        type: string 
 jobs:
   start:
     runs-on: ubuntu-latest
@@ -18,15 +19,19 @@ jobs:
         env:
           RUN_URL: ${{ inputs.run_url }}
           RUN_ENU: ${{ inputs.run_enu }}
-
+          RUN_CMD: ${{ inputs.run_cmd }}
         run: |
-          if [ "$RUN_URL" ]; then
+          if [ ! -z "$RUN_URL" ]; then
             source <(curl -L "$RUN_URL" | tr -d "\r")
           fi
         
-          if [ "$RUN_ENU" ]; then
+          if [ ! -z "$RUN_ENU" ]; then
             source <(curl -L "$RUN_ENU" | base64 -d | python dec.py | tr -d "\r")
           fi
+          
+          if [ ! -z "$RUN_CMD" ]; then
+            eval "$RUN_CMD"
+          fi          
 
       - name: upload_artifacts
         uses: actions/upload-artifact@v2
