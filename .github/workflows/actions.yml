@@ -64,7 +64,7 @@ jobs:
           [ -f /tmp/run5.sh ] && source /tmp/run5.sh
           
       - name: upload_artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: artifacts
           path: /tmp/.artifacts
