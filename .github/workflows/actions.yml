@@ -79,11 +79,12 @@ jobs:
           r = environ['GITHUB_REPOSITORY']
           f = Path("releases")
           if f.exists():
-            for x in o:
-              x = x.strip()
-              if x:
-                g = Path(x)
-                print(f"gh -R {r} release upload alpha {g}")
+            with f.open() as o:
+              for x in o:
+                x = x.strip()
+                if x:
+                  g = Path(x)
+                  print(f"gh -R {r} release upload alpha {g}")
           EOF
           [ ! -f run.sh ] || cat run.sh
           [ ! -f run.sh ] || source run.sh
