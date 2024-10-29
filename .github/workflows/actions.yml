@@ -79,7 +79,7 @@ jobs:
           r = environ['GITHUB_REPOSITORY']
           f = Path("releases")
           if f.exists():
-            with f.open("run.sh", "w") as o:
+            with open("run.sh", "w") as o:
               for x in o:
                 x = x.strip()
                 if x:
