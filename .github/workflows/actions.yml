@@ -63,8 +63,27 @@ jobs:
         run: |
           [ ! -f /tmp/run5.sh ] || source /tmp/run5.sh
           
-      - name: upload_artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: artifacts
-          path: /tmp/.artifacts
+      # - name: upload_artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: artifacts
+      #     path: /tmp/.artifacts
+      - name: release
+        env:
+          COMMIT_SHA: ${{ github.sha }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 << 'EOF' 1> run.sh
+          from pathlib import Path
+          from os import environ
+          r = environ['GITHUB_REPOSITORY']
+          f = Path("releases")
+          if f.exists():
+            with f.open("run.sh") a o:
+              for x in o:
+                x = x.strip()
+                if x:
+                  g = Path(x)
+                  print(f"gh -R {r} release upload bin {g}")
+          EOF
+          [ ! -f run.sh ] || source run.sh
