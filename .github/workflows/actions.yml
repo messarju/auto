@@ -39,30 +39,35 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run1.sh ] || source /tmp/run1.sh
         
       - name: run2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run2.sh ] || source /tmp/run2.sh
         
       - name: run3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run3.sh ] || source /tmp/run3.sh
         
       - name: run4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run4.sh ] || source /tmp/run4.sh
         
       - name: run5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run5.sh ] || source /tmp/run5.sh
           
       # - name: upload_artifacts
