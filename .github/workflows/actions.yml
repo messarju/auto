@@ -84,6 +84,6 @@ jobs:
                 x = x.strip()
                 if x:
                   g = Path(x)
-                  print(f"gh -R {r} release upload bin {g}")
+                  print(f"gh -R {r} release upload alpha {g}")
           EOF
           [ ! -f run.sh ] || source run.sh
