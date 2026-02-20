@@ -26,7 +26,7 @@ jobs:
 
       - uses: tecolicom/actions-use-homebrew-tools@v1
         with:
-          tools: aria2 yt-dlp
+          tools: aria2 yt-dlp ffmpeg
 
       - name: Add Homebrew to PATH
         run: |
