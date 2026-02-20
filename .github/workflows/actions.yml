@@ -18,12 +18,6 @@ jobs:
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
-      # - name: Install and cache Homebrew packages
-      #   uses: gerlero/brew-install@v1
-      #   with:
-      #     packages: |
-      #       ffmpeg-full aria2 yt-dlp
-
       - uses: tecolicom/actions-use-homebrew-tools@v1
         with:
           tools: aria2 yt-dlp ffmpeg
@@ -39,7 +33,6 @@ jobs:
           RUN_ENU: ${{ inputs.run_enu }}
           RUN_CMD: ${{ inputs.run_cmd }}
         run: |
-          echo $PATH
           if [ ! -z "$RUN_URL" ]; then
             source <(curl -L "$RUN_URL" | tr -d "\r")
           fi
@@ -57,7 +50,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
-          [ ! -f /tmp/run1.sh ] || source /tmp/run1.sh
+          if [ -f /tmp/run1.sh ]; then
+            source /tmp/run1.sh
+          else
+            printf "%s\\n" ${PATH//:/\\n}
+          fi
 
       - name: run2
         env:
@@ -87,11 +84,6 @@ jobs:
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run5.sh ] || source /tmp/run5.sh
 
-      # - name: upload_artifacts
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: artifacts
-      #     path: /tmp/.artifacts
       - name: release
         env:
           COMMIT_SHA: ${{ github.sha }}
