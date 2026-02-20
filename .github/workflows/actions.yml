@@ -18,11 +18,15 @@ jobs:
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
-      - name: Install and cache Homebrew packages
-        uses: gerlero/brew-install@v1
+      # - name: Install and cache Homebrew packages
+      #   uses: gerlero/brew-install@v1
+      #   with:
+      #     packages: |
+      #       ffmpeg-full aria2 yt-dlp
+
+      - uses: tecolicom/actions-use-homebrew-tools@v1
         with:
-          packages: |
-            ffmpeg-full aria2 yt-dlp
+          tools: aria2 yt-dlp
 
       - name: Add Homebrew to PATH
         run: |
@@ -35,6 +39,7 @@ jobs:
           RUN_ENU: ${{ inputs.run_enu }}
           RUN_CMD: ${{ inputs.run_cmd }}
         run: |
+          echo $PATH
           if [ ! -z "$RUN_URL" ]; then
             source <(curl -L "$RUN_URL" | tr -d "\r")
           fi
