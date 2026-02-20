@@ -6,16 +6,20 @@ on:
       run_url:
         type: string
       run_enu:
-        type: string 
+        type: string
       run_cmd:
-        type: string 
+        type: string
 jobs:
   start:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: FedericoCarboni/setup-ffmpeg@v3
-        id: setup-ffmpeg
+
+      - name: Install and cache Homebrew packages
+        uses: gerlero/brew-install@v1
+        with:
+          packages: |
+            ffmpeg-full aria2 yt-dlp
 
       - name: run
         env:
@@ -26,50 +30,50 @@ jobs:
           if [ ! -z "$RUN_URL" ]; then
             source <(curl -L "$RUN_URL" | tr -d "\r")
           fi
-        
+
           if [ ! -z "$RUN_ENU" ]; then
             source <(curl -L "$RUN_ENU" | base64 -d -i | python dec.py | tr -d "\r")
           fi
-          
+
           if [ ! -z "$RUN_CMD" ]; then
             eval "$RUN_CMD"
-          fi 
-          
+          fi
+
       - name: run1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run1.sh ] || source /tmp/run1.sh
-        
+
       - name: run2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run2.sh ] || source /tmp/run2.sh
-        
+
       - name: run3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run3.sh ] || source /tmp/run3.sh
-        
+
       - name: run4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run4.sh ] || source /tmp/run4.sh
-        
+
       - name: run5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run5.sh ] || source /tmp/run5.sh
-          
+
       # - name: upload_artifacts
       #   uses: actions/upload-artifact@v4
       #   with:
