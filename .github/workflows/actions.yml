@@ -30,7 +30,7 @@ jobs:
       - name: Unpack JSON input to Environment
         run: |
           # Use jq to format the JSON into KEY=VALUE lines and append to $GITHUB_ENV
-          echo '${{ github.event.inputs.run_env }}' | jq -r 'to_entries | .[] | "\(.key)=\(.value)"' >> $GITHUB_ENV
+          echo '${{ github.event.inputs.run_env }}' | jq -r 'to_entries | .[] | "\(.key)<<EOF\n\(.value)\nEOF"' >> $GITHUB_ENV
 
       - name: run
         env:
