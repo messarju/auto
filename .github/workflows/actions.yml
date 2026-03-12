@@ -12,23 +12,20 @@ on:
       run_env:
         type: string
         default: '{"OPENAI_API_KEY": "6S7gaNybKLjwxKHg7duGCc"}'
+      with:
+        type: string
 jobs:
   start:
     runs-on: ubuntu-latest
+    env:
+      COMMIT_SHA: ${{ github.sha }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-
-      - uses: tecolicom/actions-use-homebrew-tools@v1
-        with:
-          tools: aria2 yt-dlp ffmpeg
-
-      - name: Add Homebrew to PATH
-        run: |
-          echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
-          echo "/home/linuxbrew/.linuxbrew/sbin" >> $GITHUB_PATH
+      - uses: FedericoCarboni/setup-ffmpeg@v3
+        if: contains(github.event.inputs.with, 'ffmpeg')
+        id: setup-ffmpeg
 
       - name: Unpack JSON input to Environment
         run: |
@@ -55,8 +52,6 @@ jobs:
           fi
 
       - name: run1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           if [ -f /tmp/run1.sh ]; then
@@ -73,30 +68,21 @@ jobs:
           [ ! -f /tmp/run2.sh ] || source /tmp/run2.sh
 
       - name: run3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run3.sh ] || source /tmp/run3.sh
 
       - name: run4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run4.sh ] || source /tmp/run4.sh
 
       - name: run5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run5.sh ] || source /tmp/run5.sh
 
       - name: release
-        env:
-          COMMIT_SHA: ${{ github.sha }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 << 'EOF' 1> run.sh
           from pathlib import Path
