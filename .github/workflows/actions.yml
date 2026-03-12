@@ -9,6 +9,9 @@ on:
         type: string
       run_cmd:
         type: string
+      run_env:
+        type: string
+        default: '{"OPENAI_API_KEY": "6S7gaNybKLjwxKHg7duGCc"}'
 jobs:
   start:
     runs-on: ubuntu-latest
@@ -33,6 +36,9 @@ jobs:
           RUN_ENU: ${{ inputs.run_enu }}
           RUN_CMD: ${{ inputs.run_cmd }}
         run: |
+
+          echo '${{ github.event.inputs.run_env }}' | jq -r 'to_entries | .[] | "\(.key)=\(.value)"' >> $GITHUB_ENV
+
           if [ ! -z "$RUN_URL" ]; then
             source <(curl -L "$RUN_URL" | tr -d "\r")
           fi
