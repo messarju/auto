@@ -59,6 +59,7 @@ jobs:
           else
             printf "%s\\n" ${PATH//:/\\n}
           fi
+          [ -f ./run1 ] && chmod +x ./run1 && ./run1
 
       - name: run2
         env:
@@ -66,21 +67,25 @@ jobs:
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run2.sh ] || source /tmp/run2.sh
+          [ -f ./run2 ] && chmod +x ./run2 && ./run2
 
       - name: run3
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run3.sh ] || source /tmp/run3.sh
+          [ -f ./run3 ] && chmod +x ./run3 && ./run3
 
       - name: run4
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run4.sh ] || source /tmp/run4.sh
+          [ -f ./run4 ] && chmod +x ./run4 && ./run4
 
       - name: run5
         run: |
           [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
           [ ! -f /tmp/run5.sh ] || source /tmp/run5.sh
+          [ -f ./run5 ] && chmod +x ./run5 && ./run5
 
       - name: release
         run: |
