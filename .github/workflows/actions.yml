@@ -51,29 +51,11 @@ jobs:
             eval "$RUN_CMD"
           fi
 
-      - name: run1
-        env:
-          WHAT: run1
-        run: . ./runx.sh
-
-      - env:
-          WHAT: run2
-        run: . ./runx.sh
-
-      - name: run3
-        env:
-          WHAT: run3
-        run: . ./runx.sh
-
-      - name: run4
-        env:
-          WHAT: run4
-        run: . ./runx.sh
-
-      - name: run5
-        env:
-          WHAT: run5
-        run: . ./runx.sh
+      - run: WHAT=run1 exec sh ./runx.sh
+      - run: WHAT=run2 exec sh ./runx.sh
+      - run: WHAT=run3 exec sh ./runx.sh
+      - run: WHAT=run4 exec sh ./runx.sh
+      - run: WHAT=run5 exec sh ./runx.sh
 
       - name: release
         run: |
