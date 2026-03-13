@@ -51,11 +51,11 @@ jobs:
             eval "$RUN_CMD"
           fi
 
-      - run: WHAT=run1 exec sh ./runx.sh
-      - run: WHAT=run2 exec sh ./runx.sh
-      - run: WHAT=run3 exec sh ./runx.sh
-      - run: WHAT=run4 exec sh ./runx.sh
-      - run: WHAT=run5 exec sh ./runx.sh
+      - run: WHAT=run1 exec "$SHELL" ./runx.sh
+      - run: WHAT=run2 exec "$SHELL" ./runx.sh
+      - run: WHAT=run3 exec "$SHELL" ./runx.sh
+      - run: WHAT=run4 exec "$SHELL" ./runx.sh
+      - run: WHAT=run5 exec "$SHELL" ./runx.sh
 
       - name: release
         run: |
