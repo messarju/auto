@@ -52,35 +52,28 @@ jobs:
           fi
 
       - name: run1
-        run: |
-          [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
-          [ ! -f /tmp/run1.sh ] || source /tmp/run1.sh
-          if [ -f ./run1 ]; then
-            chmod +x ./run1 && exec ./run1
-          fi
-
-      - name: run2
         env:
+          WHAT: run1
+        run: . ./runx.sh
+
+      - env:
           WHAT: run2
         run: . ./runx.sh
 
       - name: run3
-        run: |
-          [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
-          [ ! -f /tmp/run3.sh ] || source /tmp/run3.sh
-          [ -f ./run3 ] && chmod +x ./run3 && exec ./run3
+        env:
+          WHAT: run3
+        run: . ./runx.sh
 
       - name: run4
-        run: |
-          [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
-          [ ! -f /tmp/run4.sh ] || source /tmp/run4.sh
-          [ -f ./run4 ] && chmod +x ./run4 && exec ./run4
+        env:
+          WHAT: run4
+        run: . ./runx.sh
 
       - name: run5
-        run: |
-          [ ! -f /tmp/env.sh ] || source /tmp/env.sh  
-          [ ! -f /tmp/run5.sh ] || source /tmp/run5.sh
-          [ -f ./run5 ] && chmod +x ./run5 && exec ./run5
+        env:
+          WHAT: run5
+        run: . ./runx.sh
 
       - name: release
         run: |
