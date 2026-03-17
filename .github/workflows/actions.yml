@@ -27,8 +27,10 @@ jobs:
         if: contains(github.event.inputs.with, 'ffmpeg')
         id: setup-ffmpeg
 
-      - name: Unpack JSON input to Environment
+      - name: Set Environment
+        shell: bash
         run: |
+          echo '${{ toJson(vars) }}' | jq -r 'to_entries | .[] | "\(.key)=\(.value)"' >> $GITHUB_ENV
           # Use jq to format the JSON into KEY=VALUE lines and append to $GITHUB_ENV
           echo '${{ github.event.inputs.run_env }}' | jq -r 'to_entries | .[] | "\(.key)<<EOF\n\(.value)\nEOF"' >> $GITHUB_ENV
 
