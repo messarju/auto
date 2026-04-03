@@ -62,4 +62,4 @@ jobs:
       - run: WHAT=run5 exec "$SHELL" ./runx.sh
 
       - name: release
-        run: python3 relup.py
+        run: python3 .github/workflows/relup.py
