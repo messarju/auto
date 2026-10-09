@@ -35,25 +35,15 @@ jobs:
           echo '${{ toJson(vars) }}' | jq -r 'to_entries | .[] | "\(.key)=\(.value)"' >> $GITHUB_ENV
           # Use jq to format the JSON into KEY=VALUE lines and append to $GITHUB_ENV
           echo '${{ github.event.inputs.run_env }}' | jq -r 'to_entries | .[] | "\(.key)<<EOF\n\(.value)\nEOF"' >> $GITHUB_ENV
+          mkdir -p start.d end.d
 
-      - name: run
+      - name: start
+        shell: bash
         env:
           RUN_URL: ${{ inputs.run_url }}
           RUN_ENU: ${{ inputs.run_enu }}
           RUN_CMD: ${{ inputs.run_cmd }}
-        run: |
-
-          if [ ! -z "$RUN_URL" ]; then
-            source <(curl -L "$RUN_URL" | tr -d "\r")
-          fi
-
-          if [ ! -z "$RUN_ENU" ]; then
-            source <(curl -L "$RUN_ENU" | base64 -d -i | python dec.py | tr -d "\r")
-          fi
-
-          if [ ! -z "$RUN_CMD" ]; then
-            eval "$RUN_CMD"
-          fi
+        run: . ./start.sh
 
       - run: WHAT=run1 exec "$SHELL" ./runx.sh
       - run: WHAT=run2 exec "$SHELL" ./runx.sh
@@ -61,5 +51,6 @@ jobs:
       - run: WHAT=run4 exec "$SHELL" ./runx.sh
       - run: WHAT=run5 exec "$SHELL" ./runx.sh
 
-      - name: release
-        run: python3 .github/workflows/relup.py
+      - name: end
+        shell: bash
+        run: . ./end.sh
