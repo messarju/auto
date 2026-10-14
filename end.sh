@@ -1,7 +1,10 @@
+shopt -s nullglob
 _run_d() {
 	if [ -d "$1" ]; then
 		for SELF in "$1/"*; do
-			"$SELF"
+			if [ -e "$SELF" ]; then
+				"$SELF"
+			fi
 		done
 	fi
 }
