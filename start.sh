@@ -12,7 +12,7 @@ fi
 
 ls -lh .
 echo $PWD
-chmod +x start.d/* end.d/*
+chmod +x start.d/* end.d/* || true
 
 _run_d() {
 	if [ -d "$1" ]; then
