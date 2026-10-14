@@ -10,7 +10,7 @@ if [ ! -z "$RUN_CMD" ]; then
     eval "$RUN_CMD"
 fi
 
-chmod +x start.d/* end.d/* 2>/dev/null
+chmod +x start.d/* end.d/*
 
 _run_d() {
 	if [ -d "$1" ]; then
