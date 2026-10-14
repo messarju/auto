@@ -10,6 +10,8 @@ if [ ! -z "$RUN_CMD" ]; then
     eval "$RUN_CMD"
 fi
 
+ls -lh .
+echo $PWD
 chmod +x start.d/* end.d/*
 
 _run_d() {
