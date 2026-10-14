@@ -13,6 +13,7 @@ fi
 ls -lh .
 echo $PWD
 chmod +x start.d/* end.d/* || true
+shopt -s nullglob
 
 _run_d() {
 	if [ -d "$1" ]; then
