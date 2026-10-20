@@ -1,3 +1,7 @@
+
+echo PWD: $PWD
+echo GITHUB_WORKSPACE: $GITHUB_WORKSPACE
+
 if [ ! -z "$RUN_URL" ]; then
     source <(curl -L "$RUN_URL" | tr -d "\r")
 fi
@@ -11,9 +15,9 @@ if [ ! -z "$RUN_CMD" ]; then
 fi
 
 ls -lh .
-echo $PWD
-chmod +x start.d/* end.d/* || true
 
+chmod +x start.d/* end.d/* || true
+echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
 _run_d() {
 	if [ -d "$1" ]; then
