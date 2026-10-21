@@ -1,5 +1,7 @@
-[ ! -f /tmp/env.sh ] || . /tmp/env.sh  
-[ -f $WHAT.sh ] && . $WHAT.sh
 if [ -f $WHAT ]; then
+    [ -f /tmp/env.sh ] && . /tmp/env.sh  
     chmod +x ./$WHAT && exec ./$WHAT
+elif [ -f $WHAT.sh ]; then
+    [ -f /tmp/env.sh ] && . /tmp/env.sh  
+    . $WHAT.sh
 fi

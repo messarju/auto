@@ -16,8 +16,7 @@ fi
 
 ls -lh .
 
-chmod +x start.d/* end.d/* || true
-echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+chmod +x start.d/* end.d/* "$HOME"/.local/bin/* || true
 
 _run_d() {
 	if [ -d "$1" ]; then

@@ -25,17 +25,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: FedericoCarboni/setup-ffmpeg@v3
-        if: contains(github.event.inputs.with, 'ffmpeg')
-        id: setup-ffmpeg
-
       - name: Set Environment
         shell: bash
         run: |
           echo '${{ toJson(vars) }}' | jq -r 'to_entries | .[] | "\(.key)=\(.value)"' >> $GITHUB_ENV
           # Use jq to format the JSON into KEY=VALUE lines and append to $GITHUB_ENV
           echo '${{ github.event.inputs.run_env }}' | jq -r 'to_entries | .[] | "\(.key)<<EOF\n\(.value)\nEOF"' >> $GITHUB_ENV
-          mkdir -p start.d end.d bin "$HOME"/.local/bin
+          mkdir -vp start.d end.d bin "$HOME"/.local/bin
 
       - name: start
         shell: bash
